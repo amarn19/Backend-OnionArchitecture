@@ -7,10 +7,13 @@ logger = logger()
 db_type= os.getenv('DB_TYPE')
 logger.info(db_type)
 
+dao = None
+dynamodb = None
 class Service:
     def __init__(self):
-        self.dao = Dao()
-        self.dynamodb = Dynamodb()
+        global dao, dynamodb
+        dao = Dao()
+        dynamodb = Dynamodb()
         
     def handleService(self,user,dashboard,*store):
         if(db_type=='sqlLite'):
@@ -22,8 +25,13 @@ class Service:
         elif(db_type=='mangodb'):
             logger.info('mangodb')
         elif(db_type=='dynamodb'):
-            self.dao.dataAccess(user,dashboard,self.dynamodb)
-            logger.info('dynamodb')
+            try:
+                logger.info('dynamodb')
+                global dao, dynamodb
+                response = dao.dataAccess(user,dashboard,dynamodb)
+                return response
+            except (Exception) as e:
+                raise
         elif(db_type=='rds'):
             logger.info('')
         elif(db_type=='dynamodb'):

@@ -16,14 +16,13 @@ logger = logger()
 
 class Dynamodb:
     # createUser/createStore
-    @staticmethod
-    def newItem(item):
-        print(item)
+    def newItem(self,item):
         try:
             response = table.put_item(
                 Item=item,
                 ConditionExpression='attribute_not_exists(pk) AND attribute_not_exists(sk)'
             )
+            return response
         except (ClientError, KeyError) as e:
                 raise
-        return response
+        

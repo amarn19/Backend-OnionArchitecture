@@ -18,7 +18,7 @@ class User:
             "email":self.email,
             "gender":self.gender,
             "phonenumber":self.phonenumber,
-            "address":getAddress
+            "address":self.getAddress()
         }
         return user_details
     
