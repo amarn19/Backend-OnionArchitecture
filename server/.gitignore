@@ -1,0 +1,10 @@
+.env
+Lib/
+Scripts/
+pyvenv.cfg
+__pycache__
+*.db
+Pipfile.lock
+Pipfile
+Lib/
+Include/
