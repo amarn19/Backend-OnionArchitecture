@@ -10,11 +10,14 @@ dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
 logger = logger()
 
+def initialize_app():
+    app = Flask(__name__)
+    logger.info('Flask application started')
+    return app
 
-app = Flask(__name__)
-logger.info('Flask application started')
+app = initialize_app()
 
-@app.route('/')
+@app.route('/home')
 def home():
     return 'homepage'
 
